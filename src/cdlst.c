@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:14:01 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/02/22 16:09:02 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/02/26 15:04:25 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_node	*ft_cdlstnew(int e)
 	return (new_node);
 }
 
-void	ft_lstclear(t_cdlst *cdl)
+void	ft_cdlstclear(t_cdlst *cdl)
 {
 	t_node	*cur;
 	t_node	*tmp;

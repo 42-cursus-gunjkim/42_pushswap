@@ -6,52 +6,36 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:55:59 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/02/22 16:09:02 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/02/26 15:16:01 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Inc/rule.h"
 
-void	sa(t_stack	*stack)
+void	ft_switch(t_cdlst *cdlst)
 {
 	int	tmp;
 
-	tmp = stack->a->element;
-	stack->a->element = stack->a->next->element;
-	stack->a->next->element = tmp;
+	tmp = cdlst->lst->element;
+	cdlst->lst->element = cdlst->lst->next->element;
+	cdlst->lst->next->element = tmp;
+	ft_printf("s%s\n", cdlst->name);
 }
 
-void	sb(t_stack	*stack)
+void	ft_switch_both(t_cdlst *a, t_cdlst *b)
 {
-	int	tmp;
-
-	tmp = stack->b->element;
-	stack->b->element = stack->b->next->element;
-	stack->b->next->element = tmp;
+	ft_switch(a);
+	ft_switch(b);
+	ft_printf("ss\n");
 }
 
-void	ss(t_stack *stack)
-{
-	sa(stack);
-	sb(stack);
-}
-
-void	pa(t_stack *stack)
+void	ft_push(t_cdlst *in, t_cdlst *out)
 {
 	t_node	*tmp;
 
-	if (stack->b == NULL)
+	if (out->lst == NULL)
 		return ;
-	tmp = ft_cdlst_get_front(&(stack->b));
-	ft_cdlst_add_front(&(stack->a), tmp);
-}
-
-void	pb(t_stack *stack)
-{
-	t_node	*tmp;
-
-	if (stack->a == NULL)
-		return ;
-	tmp = ft_cdlst_get_front(&(stack->a));
-	ft_cdlst_add_front(&(stack->b), tmp);
+	tmp = ft_cdlst_get_front(out);
+	ft_cdlst_add_front(in, tmp);
+	ft_printf("p%s\n", in->name);
 }
