@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:45:05 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/02/22 16:09:01 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/02/26 17:52:48 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define PUSH_SWAP_H
 
 # include "rule.h"
-# include "cdlst.h"
 
-#endif PUSH_SWAP_H
+void	parse_argv(int argc, char **argv, t_cdlst *a);
+void	sort_element(t_cdlst *a, t_cdlst *b);
+
+#endif
+ 
