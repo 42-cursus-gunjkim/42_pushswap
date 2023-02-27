@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:14:01 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/02/26 15:04:25 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/02/27 11:48:50 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 t_node	*ft_cdlst_get_front(t_cdlst *cdl)
 {
-	t_node	*head;
+	t_node	*ret;
 
 	if (cdl->lst == NULL)
 		return (NULL);
-	head = cdl->lst;
-	if (head -> next == head)
+	ret = cdl->lst;
+	if (ret -> next == ret)
 		cdl->lst = NULL;
 	else
 	{
-		head->prev->next = head->next;
-		head->next->prev = head->prev;
-		cdl->lst = head->next;
+		ret->prev->next = ret->next;
+		ret->next->prev = ret->prev;
+		cdl->lst = ret->next;
 	}
-	return (head);
+	return (ret);
 }
 
 t_node	*ft_cdlstnew(int e)
@@ -66,8 +66,6 @@ void	ft_cdlstclear(t_cdlst *cdl)
 
 void	ft_cdlst_add_back(t_cdlst *cdl, t_node *new_node)
 {
-	t_node	*cur;
-
 	if (cdl->lst == NULL)
 	{
 		cdl->lst = new_node;
@@ -76,20 +74,15 @@ void	ft_cdlst_add_back(t_cdlst *cdl, t_node *new_node)
 	}
 	else if (cdl->lst != NULL)
 	{
-		cur = cdl->lst;
-		while (cur->next != cdl->lst)
-			cur = cur->next;
-		cur->next = new_node;
+		cdl->lst->prev->next = new_node;
+		new_node->prev = cdl->lst->prev;
 		new_node->next = cdl->lst;
 		cdl->lst->prev = new_node;
-		new_node->prev = cur;
 	}
 }
 
 void	ft_cdlst_add_front(t_cdlst *cdl, t_node *new_node)
 {
-	t_node	*cur;
-
 	if (cdl->lst == NULL)
 	{
 		cdl->lst = new_node;
@@ -98,11 +91,10 @@ void	ft_cdlst_add_front(t_cdlst *cdl, t_node *new_node)
 	}
 	else if (cdl->lst != NULL)
 	{
-		cur = cdl->lst;
-		new_node->next = cur;
-		new_node->prev = cur->prev;
-		cur->prev->next = new_node;
-		cur->prev = new_node;
+		cdl->lst->prev->next = new_node;
+		new_node->prev = cdl->lst->prev;
+		new_node->next = cdl->lst;
+		cdl->lst->prev = new_node;
 		cdl->lst = new_node;
 	}
 }
