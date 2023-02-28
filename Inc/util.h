@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   util.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 14:45:05 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/02/28 20:12:27 by gunjkim          ###   ########.fr       */
+/*   Created: 2023/02/28 18:37:37 by gunjkim           #+#    #+#             */
+/*   Updated: 2023/02/28 20:09:43 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef UTIL_H
+# define UTIL_H
 
-# include "rule.h"
+# include "cdlst.h"
+# include "stdlib.h"
+# include "../libft/libft.h"
 
-void	parse_argv(char **argv, t_cdlst *a);
-void	sort_element(t_cdlst *a, t_cdlst *b);
-void	partition(t_cdlst *a, t_cdlst *b);
+void	error_exit(char *str);
+int		is_all_digit(char *arg);
+void	quick_sort(int *arr, int start, int end);
 
 #endif
- 

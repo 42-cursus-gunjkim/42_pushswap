@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 14:45:05 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/02/28 20:12:27 by gunjkim          ###   ########.fr       */
+/*   Created: 2023/02/28 18:27:35 by gunjkim           #+#    #+#             */
+/*   Updated: 2023/02/28 18:27:38 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+void	ft_swap(int *a, int *b)
+{
+	int	tmp;
 
-# include "rule.h"
-
-void	parse_argv(char **argv, t_cdlst *a);
-void	sort_element(t_cdlst *a, t_cdlst *b);
-void	partition(t_cdlst *a, t_cdlst *b);
-
-#endif
- 
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}

@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:15:13 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/02/27 11:48:55 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/02/28 17:37:19 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct s_node
 {
 	int				element;
+	int				index;
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;
@@ -26,6 +27,7 @@ typedef struct s_cdlst
 {
 	t_node	*lst;
 	char	*name;
+	int		max_count;
 }	t_cdlst;
 
 t_node	*ft_cdlstnew(int e);
