@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:14:01 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/02/27 11:48:50 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/02/28 19:55:49 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ t_node	*ft_cdlstnew(int e)
 	if (!new_node)
 		return (NULL);
 	new_node -> element = e;
+	new_node -> index = -1;
 	new_node -> next = NULL;
 	new_node -> prev = NULL;
 	return (new_node);

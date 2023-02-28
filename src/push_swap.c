@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:18:30 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/02/27 11:57:42 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/02/28 20:12:54 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	print_cdl(t_cdlst *cdl)
 	}
 	while (cur->next != cdl->lst)
 	{
-		ft_printf("%d \n", cur->element);
+		ft_printf("value : %d, index : %d\n", cur->element, cur->index);
 		cur = cur->next;
 	}
-	ft_printf("%d \n", cur->element);
+	ft_printf("value : %d, index : %d\n", cur->element, cur->index);
 }
 
 void	check_leak(void)
@@ -45,11 +45,18 @@ int	main(int argc, char *argv[])
 		return (0);
 	a = (t_cdlst *)malloc(sizeof(t_cdlst));
 	a->name = "a";
-	parse_argv(argc, argv, a);
+	a->max_count = argc - 1;
+	a->lst = NULL;
+	parse_argv(argv, a);
 	b = (t_cdlst *)malloc(sizeof(t_cdlst));
 	b->name = "b";
-	//sort_element(a, b);
-	//lst free
-	atexit(check_leak);
+	b->max_count = argc - 1;
+	b->lst = NULL;
+	partition(a, b);
+	ft_cdlstclear(a);
+	ft_cdlstclear(b);
+	free(a);
+	free(b);
+	//atexit(check_leak);
 	return (0);
 }
