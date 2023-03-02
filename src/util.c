@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 18:28:19 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/02/28 20:21:30 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/02 20:09:40 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,18 @@ void	quick_sort(int *arr, int start, int end)
 	}
 	quick_sort(arr, start, j - 1);
 	quick_sort(arr, j + 1, end);
+}
+
+int	ft_abs(int a)
+{
+	if (a < 0)
+		return (-a);
+	return (a);
+}
+
+int	ft_min(int a, int b)
+{
+	if (a > b)
+		return (b);
+	return (a);
 }
