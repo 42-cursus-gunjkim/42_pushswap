@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gunjkim <gunjkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:44:27 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/02 20:47:20 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/03 14:16:59 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Inc/rule.h"
+#include "../Inc/util.h"
 
 int	get_a_rotate_count(t_cdlst *a, int index)
 {
@@ -19,11 +20,13 @@ int	get_a_rotate_count(t_cdlst *a, int index)
 
 	count = 0;
 	tmp = a->lst;
-	if (tmp == NULL || (tmp->index > index && tmp->next == tmp))
+	if (tmp == NULL)
 		return (0);
 	while (1)
 	{
 		if (tmp->index > index && tmp->prev->index < index)
+			break ;
+		if (tmp->index > index && tmp->prev->index == a->max_count - 1)
 			break ;
 		count++;
 		tmp = tmp->next;
@@ -72,7 +75,7 @@ void	partition(t_cdlst *a, t_cdlst *b)
 		{
 			(b->part_s)++;
 			ft_push(b, a);
-			ft_rotate(b);
+			ft_rotate(b, 1);
 		}
 		else if (a->lst->index < (pivot * 2) && a->lst->index > pivot)
 		{
@@ -80,19 +83,19 @@ void	partition(t_cdlst *a, t_cdlst *b)
 			(b->part_m)++;
 		}
 		else
-			ft_rotate(a);
+			ft_rotate(a, 1);
 		count++;
 	}
 	while (a->lst->next != a->lst)
 	{
 		if (a->lst->index == a->max_count - 1)
-			ft_rotate(a);
+			ft_rotate(a, 1);
 		else
 			ft_push(b, a);
 	}
 	b->part_l = b->max_count - b->part_m - b->part_s;
-	a->count = 0;
-	b->count = b->max_count;
+	a->count = 1;
+	b->count = b->max_count - 1;
 }
 
 t_node	*get_min_node(t_cdlst *b)
@@ -127,7 +130,14 @@ void	sort_element(t_cdlst *a, t_cdlst *b)
 	t_node	*min_node;
 	int		rb_c;
 	int		ra_c;
+	int		zero_count;
+	int		i;
+	int		j;
+	t_node	*tmp;
 
+	i = 0;
+	j = 0;
+	zero_count = 0;
 	partition(a, b);
 	while (b->lst != NULL)
 	{
@@ -135,25 +145,49 @@ void	sort_element(t_cdlst *a, t_cdlst *b)
 		ra_c = 0;
 		cal_greedy(a, b);
 		min_node = get_min_node(b);
+		if (rb_c * ra_c > 0)
+		{
+			while (j < ft_min(ft_abs(min_node->ra), ft_abs(min_node->rb)))
+			{
+				if (min_node->ra < 0)
+					ft_reverse_rotate_both(a, b);
+				else
+					ft_rotate_both(a, b);
+				rb_c++;
+				ra_c++;
+			}
+		}
 		while (rb_c < abs(min_node->rb))
 		{
 			if (min_node->rb < 0)
-				ft_reverse_rotate(b);
+				ft_reverse_rotate(b, 1);
 			else
-				ft_rotate(b);
+				ft_rotate(b, 1);
 			rb_c++;
 		}
 		while (ra_c < abs(min_node->ra))
 		{
 			if (min_node->ra < 0)
-				ft_reverse_rotate(a);
+				ft_reverse_rotate(a, 1);
 			else
-				ft_rotate(a);
+				ft_rotate(a, 1);
 			ra_c++;
 		}
 		ft_push(a, b);
+		(a->count)++;
 		(b->count)--;
 	}
-	while (a->lst->index != 0)
-		ft_rotate(a);
+	tmp = a->lst;
+	while (tmp->index != 0)
+	{
+		tmp = tmp->next;
+		zero_count++;
+	}
+	if (zero_count > a->max_count / 2)
+		zero_count = a->max_count - zero_count;
+	while (i < zero_count)
+	{
+		i++;
+		ft_rotate(a, 1);
+	}
 }

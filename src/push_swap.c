@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gunjkim <gunjkim@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:18:30 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/02 19:28:53 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/03 14:16:57 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int	main(int argc, char *argv[])
 	b->part_m = 0;
 	b->part_s = 0;
 	sort_element(a, b);
-	print_cdl(b);
-	print_cdl(a);
+	//print_cdl(b);
+	//print_cdl(a);
 	ft_cdlstclear(a);
 	ft_cdlstclear(b);
 	free(a);
