@@ -1,7 +1,7 @@
 NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = push_swap.c parser.c rule_rotate.c rule_switch_push.c cdlst.c algorithm.c util.c partition.c
+SRCS = push_swap.c parser.c rule_rotate.c rule_switch_push.c cdlst.c sort.c util.c greedy.c
 OBJS = $(SRCS:.c=.o)
 
 all: make_mandatory

@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:18:30 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/07 12:40:04 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/07 20:21:35 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ void	init_cdl(t_cdlst *cdl, char *name, int max_count)
 	cdl->max_count = max_count;
 	cdl->lst = NULL;
 	cdl->count = 0;
-	cdl->part_l = 0;
-	cdl->part_m = 0;
-	cdl->part_s = 0;
 }
 
 void	clear_two_stack(t_cdlst *a, t_cdlst *b)
@@ -73,7 +70,7 @@ int	main(int argc, char *argv[])
 		error_exit("ERROR!\n");
 	init_cdl(b, "b", argc -1);
 	partition(a, b);
-	sort_element(a, b);
+	//sort_element(a, b);
 	clear_two_stack(a, b);
-	return (0); 
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:45:05 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/07 11:38:53 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/07 20:04:53 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 void	parse_argv(char **argv, t_cdlst *a);
 void	sort_element(t_cdlst *a, t_cdlst *b);
 void	partition(t_cdlst *a, t_cdlst *b);
+void	cal_greedy(t_cdlst *a, t_cdlst *b);
+t_node	*get_min_node(t_cdlst *b);
 
 #endif
  
