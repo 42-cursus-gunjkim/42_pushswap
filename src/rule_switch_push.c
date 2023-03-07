@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:55:59 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/02/27 11:48:53 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/07 11:33:44 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ void	ft_push(t_cdlst *in, t_cdlst *out)
 		return ;
 	tmp = ft_cdlst_get_front(out);
 	ft_cdlst_add_front(in, tmp);
+	(out->count)--;
+	(in->count)++;
 	ft_printf("p%s\n", in->name);
 }

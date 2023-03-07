@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gunjkim <gunjkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:18:30 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/03 14:16:57 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/07 12:40:04 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,25 @@ void	print_cdl(t_cdlst *cdl)
 	ft_printf("value : %d, index : %d, r : %d, %d\n", cur->element, cur->index, cur->ra, cur->rb);
 }
 
+void	init_cdl(t_cdlst *cdl, char *name, int max_count)
+{
+	cdl->name = name;
+	cdl->max_count = max_count;
+	cdl->lst = NULL;
+	cdl->count = 0;
+	cdl->part_l = 0;
+	cdl->part_m = 0;
+	cdl->part_s = 0;
+}
+
+void	clear_two_stack(t_cdlst *a, t_cdlst *b)
+{
+	ft_cdlstclear(a);
+	ft_cdlstclear(b);
+	free(a);
+	free(b);
+}
+
 void	check_leak(void)
 {
 	system("leaks --list -- push_swap");
@@ -44,27 +63,17 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		return (0);
 	a = (t_cdlst *)malloc(sizeof(t_cdlst));
-	a->name = "a";
-	a->max_count = argc - 1;
-	a->lst = NULL;
-	a->part_l = 0;
-	a->part_m = 0;
-	a->part_s = 0;
+	if (a == NULL)
+		error_exit("ERROR!\n");
+	init_cdl(a, "a", argc - 1);
 	parse_argv(argv, a);
+	a->count = argc - 1;
 	b = (t_cdlst *)malloc(sizeof(t_cdlst));
-	b->name = "b";
-	b->max_count = argc - 1;
-	b->lst = NULL;
-	b->part_l = 0;
-	b->part_m = 0;
-	b->part_s = 0;
+	if (b == NULL)
+		error_exit("ERROR!\n");
+	init_cdl(b, "b", argc -1);
+	partition(a, b);
 	sort_element(a, b);
-	//print_cdl(b);
-	//print_cdl(a);
-	ft_cdlstclear(a);
-	ft_cdlstclear(b);
-	free(a);
-	free(b);
-	//atexit(check_leak);
-	return (0);
+	clear_two_stack(a, b);
+	return (0); 
 }

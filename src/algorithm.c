@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algorithm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gunjkim <gunjkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:44:27 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/03 14:16:59 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/07 13:03:10 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,42 +62,6 @@ void	cal_greedy(t_cdlst *a, t_cdlst *b)
 	}
 }
 
-void	partition(t_cdlst *a, t_cdlst *b)
-{
-	int		pivot;
-	int		count;
-
-	pivot = (int)(a->max_count / 3);
-	count = 0;
-	while (count < a->max_count)
-	{
-		if (a->lst->index <= pivot)
-		{
-			(b->part_s)++;
-			ft_push(b, a);
-			ft_rotate(b, 1);
-		}
-		else if (a->lst->index < (pivot * 2) && a->lst->index > pivot)
-		{
-			ft_push(b, a);
-			(b->part_m)++;
-		}
-		else
-			ft_rotate(a, 1);
-		count++;
-	}
-	while (a->lst->next != a->lst)
-	{
-		if (a->lst->index == a->max_count - 1)
-			ft_rotate(a, 1);
-		else
-			ft_push(b, a);
-	}
-	b->part_l = b->max_count - b->part_m - b->part_s;
-	a->count = 1;
-	b->count = b->max_count - 1;
-}
-
 t_node	*get_min_node(t_cdlst *b)
 {
 	t_node	*ret;
@@ -127,67 +91,64 @@ t_node	*get_min_node(t_cdlst *b)
 
 void	sort_element(t_cdlst *a, t_cdlst *b)
 {
-	t_node	*min_node;
-	int		rb_c;
-	int		ra_c;
-	int		zero_count;
-	int		i;
-	int		j;
 	t_node	*tmp;
+	int		ra;
+	int		rb;
+	int		zero_loc;
 
-	i = 0;
-	j = 0;
-	zero_count = 0;
-	partition(a, b);
+	zero_loc = 0;
 	while (b->lst != NULL)
 	{
-		rb_c = 0;
-		ra_c = 0;
+		ra = 0;
+		rb = 0;
 		cal_greedy(a, b);
-		min_node = get_min_node(b);
-		if (rb_c * ra_c > 0)
+		tmp = get_min_node(b);
+		if (tmp->ra * tmp->rb > 0)
 		{
-			while (j < ft_min(ft_abs(min_node->ra), ft_abs(min_node->rb)))
+			while (ra < ft_min(ft_abs(tmp->ra), ft_abs(tmp->rb)))
 			{
-				if (min_node->ra < 0)
+				if (tmp->ra < 0)
 					ft_reverse_rotate_both(a, b);
 				else
 					ft_rotate_both(a, b);
-				rb_c++;
-				ra_c++;
+				ra++;
 			}
+			rb = ra;
 		}
-		while (rb_c < abs(min_node->rb))
+		while (ra < ft_abs(tmp->ra))
 		{
-			if (min_node->rb < 0)
-				ft_reverse_rotate(b, 1);
+			if (tmp->ra < 0)
+				ft_reverse_rotate(a, PRINT);
 			else
-				ft_rotate(b, 1);
-			rb_c++;
+				ft_rotate(a, PRINT);
+			ra++;
 		}
-		while (ra_c < abs(min_node->ra))
+		ra = 0;
+		while (rb < ft_abs(tmp->rb))
 		{
-			if (min_node->ra < 0)
-				ft_reverse_rotate(a, 1);
+			if (tmp->rb < 0)
+				ft_reverse_rotate(b, PRINT);
 			else
-				ft_rotate(a, 1);
-			ra_c++;
+				ft_rotate(b, PRINT);
+			rb++;
 		}
 		ft_push(a, b);
-		(a->count)++;
-		(b->count)--;
 	}
 	tmp = a->lst;
+	ra = 0;
 	while (tmp->index != 0)
 	{
+		zero_loc++;
 		tmp = tmp->next;
-		zero_count++;
 	}
-	if (zero_count > a->max_count / 2)
-		zero_count = a->max_count - zero_count;
-	while (i < zero_count)
+	if (zero_loc > a->max_count / 2)
+		zero_loc = -(a->max_count - zero_loc);
+	while (ra < ft_abs(zero_loc))
 	{
-		i++;
-		ft_rotate(a, 1);
+		ra++;
+		if (zero_loc > 0)
+			ft_rotate(a, PRINT);
+		else
+			ft_reverse_rotate(a, PRINT);
 	}
 }

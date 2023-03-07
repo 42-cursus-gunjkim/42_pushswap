@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gunjkim <gunjkim@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 18:28:19 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/03 14:17:01 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/07 13:30:50 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,17 @@ void	quick_sort(int *arr, int start, int end)
 	pivot = arr[start];
 	while (i <= j)
 	{
-		while (arr[i] < pivot)
+		while (arr[i] < pivot && i < end)
 			i++;
-		while (arr[j] > pivot)
+		while (arr[j] > pivot && j >= 0)
 			j--;
 		if (i < j)
 			ft_swap(&arr[j], &arr[i]);
 		else
+		{
 			ft_swap(&arr[j], &arr[start]);
+			break ;
+		}
 	}
 	quick_sort(arr, start, j - 1);
 	quick_sort(arr, j + 1, end);
