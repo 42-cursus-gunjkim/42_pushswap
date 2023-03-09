@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:13:21 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 15:09:02 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/09 17:08:55 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "../Inc/cdlst.h"
-#include "../Inc/util.h"
+#include "../Inc_bonus/cdlst_bonus.h"
+#include "../Inc_bonus/util_bonus.h"
 
 int	arg_check(char *arg)
 {
@@ -73,25 +73,6 @@ void	is_duplicated(int *arr, int n)
 	}
 }
 
-void	is_sorted(int *arr, int n)
-{
-	int	flag;
-	int	index;
-
-	flag = 1;
-	index = 0;
-	if (n == 1 || n == 0)
-		exit(0);
-	while (index < n - 1)
-	{
-		if (arr[index] > arr[index + 1])
-			flag *= 0;
-		index++;
-	}
-	if (flag != 0)
-		exit(0);
-}
-
 void	parse_argv(char **argv, t_cdlst *a)
 {
 	int		index;
@@ -115,7 +96,6 @@ void	parse_argv(char **argv, t_cdlst *a)
 		index++;
 	}
 	is_duplicated(arr_index, a->max_count);
-	is_sorted(arr_index, a->max_count);
 	replace_v_to_i(arr_index, a, a->max_count);
 	free(arr_index);
 }

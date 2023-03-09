@@ -1,45 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rule_rotate.c                                      :+:      :+:    :+:   */
+/*   rule_rotate_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:34:20 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 14:17:38 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/09 17:09:03 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Inc/rule.h"
+#include "../Inc_bonus/rule_bonus.h"
 
-void	ft_rotate(t_cdlst *cdlst, int flag)
+void	ft_rotate(t_cdlst *cdlst)
 {
 	if (cdlst->lst == NULL)
 		return ;
 	cdlst->lst = cdlst->lst->next;
-	if (flag == PRINT)
-		ft_printf("r%s\n", cdlst->name);
 }
 
 void	ft_rotate_both(t_cdlst *a, t_cdlst *b)
 {
-	ft_rotate(a, NO_PRINT);
-	ft_rotate(b, NO_PRINT);
-	ft_printf("rr\n");
+	ft_rotate(a);
+	ft_rotate(b);
 }
 
-void	ft_reverse_rotate(t_cdlst *cdlst, int flag)
+void	ft_reverse_rotate(t_cdlst *cdlst)
 {
 	if (cdlst->lst == NULL)
 		return ;
 	cdlst->lst = cdlst->lst->prev;
-	if (flag == PRINT)
-		ft_printf("rr%s\n", cdlst->name);
 }
 
 void	ft_reverse_rotate_both(t_cdlst *a, t_cdlst *b)
 {
-	ft_reverse_rotate(a, NO_PRINT);
-	ft_reverse_rotate(b, NO_PRINT);
-	ft_printf("rrr\n");
+	ft_reverse_rotate(a);
+	ft_reverse_rotate(b);
 }

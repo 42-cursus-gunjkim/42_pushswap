@@ -6,71 +6,69 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:18:30 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/07 20:21:35 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/09 15:46:22 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Inc/push_swap.h"
 
-void	print_cdl(t_cdlst *cdl)
+t_cdlst	*alloc_init_cdl(char *name, int max_count)
 {
-	t_node	*cur;
+	t_cdlst	*new;
 
-	cur = cdl->lst;
-	ft_printf("This is cdl : %s\n", cdl->name);
-	if (cdl->lst == NULL)
-	{
-		ft_printf("list is empty\n");
-		return ;
-	}
-	while (cur->next != cdl->lst)
-	{
-		ft_printf("value : %d, index : %d, r : %d, %d\n", cur->element, cur->index, cur->ra, cur->rb);
-		cur = cur->next;
-	}
-	ft_printf("value : %d, index : %d, r : %d, %d\n", cur->element, cur->index, cur->ra, cur->rb);
+	new = (t_cdlst *)malloc(sizeof(t_cdlst));
+	if (new == NULL)
+		error_exit("ERROR!\n");
+	new->name = name;
+	new->max_count = max_count;
+	new->lst = NULL;
+	new->count = 0;
+	return (new);
 }
 
-void	init_cdl(t_cdlst *cdl, char *name, int max_count)
-{
-	cdl->name = name;
-	cdl->max_count = max_count;
-	cdl->lst = NULL;
-	cdl->count = 0;
-}
-
-void	clear_two_stack(t_cdlst *a, t_cdlst *b)
+void	clear_all(t_cdlst *a, t_cdlst *b, int argc, char **argv)
 {
 	ft_cdlstclear(a);
 	ft_cdlstclear(b);
 	free(a);
 	free(b);
+	if (argc == 2)
+		ft_double_free(argv);
 }
 
-void	check_leak(void)
+void	parse_sort_clear(t_cdlst *a, t_cdlst *b, int argc, char **element_list)
 {
-	system("leaks --list -- push_swap");
+	parse_argv(element_list, a);
+	partition(a, b);
+	sort_element(a, b);
+	clear_all(a, b, argc, element_list);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_cdlst	*a;
 	t_cdlst	*b;
+	int		num_of_element;
+	char	**element_list;
 
 	if (argc < 2)
 		return (0);
-	a = (t_cdlst *)malloc(sizeof(t_cdlst));
-	if (a == NULL)
-		error_exit("ERROR!\n");
-	init_cdl(a, "a", argc - 1);
-	parse_argv(argv, a);
-	a->count = argc - 1;
-	b = (t_cdlst *)malloc(sizeof(t_cdlst));
-	if (b == NULL)
-		error_exit("ERROR!\n");
-	init_cdl(b, "b", argc -1);
-	partition(a, b);
-	//sort_element(a, b);
-	clear_two_stack(a, b);
+	num_of_element = 0;
+	if (argc == 2)
+	{
+		element_list = ft_split(argv[1], ' ');
+		if (element_list == NULL)
+			error_exit("ERROR!\n");
+		while (element_list[num_of_element] != NULL)
+			num_of_element++;
+	}
+	else
+	{
+		num_of_element = argc - 1;
+		element_list = argv + 1;
+	}
+	a = alloc_init_cdl("a", num_of_element);
+	b = alloc_init_cdl("b", num_of_element);
+	parse_sort_clear(a, b, argc, element_list);
 	return (0);
 }

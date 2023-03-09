@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:27:38 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/07 20:04:32 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/09 15:49:34 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,16 @@ t_node	*get_min_node(t_cdlst *b)
 	return (ret);
 }
 
-void	biggest(t_cdlst *a, t_cdlst *b)
+void	big_three(t_cdlst *a, t_cdlst *b)
 {
-	while (a->lst->next != a->lst)
+	int	tmp;
+	int	max;
+
+	max = a->max_count - 1;
+	while (a->count != 3)
 	{
-		if (a->lst->index == a->max_count - 1)
+		tmp = a->lst->index;
+		if (tmp == max || tmp == max - 1 || tmp == max - 2)
 			ft_rotate(a, PRINT);
 		else
 			ft_push(b, a);
@@ -102,7 +107,7 @@ void	partition(t_cdlst *a, t_cdlst *b)
 
 	pivot = (int)(a->max_count / 3);
 	count = 0;
-	while (count < a->max_count)
+	while (count < a->max_count - 1 && a->count > 3)
 	{
 		if (a->lst->index <= pivot)
 		{
@@ -110,10 +115,11 @@ void	partition(t_cdlst *a, t_cdlst *b)
 			ft_rotate(b, PRINT);
 		}
 		else if (a->lst->index < (pivot * 2) && a->lst->index > pivot)
-			ft_push(a, b);
+			ft_push(b, a);
 		else
 			ft_rotate(a, PRINT);
 		count++;
 	}
-	biggest(a, b);
+	if (a->count > 3)
+		big_three(a, b);
 }

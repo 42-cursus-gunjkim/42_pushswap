@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:44:27 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/07 20:19:18 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/09 16:26:31 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	rotate_both_for_minnode(int *count, t_node *tmp, t_cdlst *a, t_cdlst *b)
 	}
 }
 
-void	rotate_stack_for_minnode(int count, t_node *tmp, t_cdlst *lst)
+void	rotate_stack_for_minnode(int count, int max, t_cdlst *lst)
 {
-	while (count < ft_abs(tmp->ra))
+	while (count < ft_abs(max))
 	{
-		if (tmp->ra < 0)
+		if (max < 0)
 			ft_reverse_rotate(lst, PRINT);
 		else
 			ft_rotate(lst, PRINT);
@@ -62,12 +62,41 @@ void	rotate_stack_a_to_zerotop(t_cdlst *a)
 	}
 }
 
+void	sort_three_in_a(t_cdlst *a)
+{
+	t_node	*tmp;
+	int		max;
+
+	max = a->max_count - 1;
+	tmp = a->lst;
+	if (a->max_count == 2 && tmp->index > tmp->next->index)
+		ft_switch(a);
+	else if (tmp->index == max && tmp->next->index == max - 1)
+	{
+		ft_switch(a);
+		ft_reverse_rotate(a, PRINT);
+	}
+	else if (tmp->index == max && tmp->next->index == max - 2)
+		ft_rotate(a, PRINT);
+	else if (tmp->index == max - 1 && tmp->next->index == max - 2)
+		ft_switch(a);
+	else if (tmp->index == max - 1 && tmp->next->index == max)
+		ft_reverse_rotate(a, PRINT);
+	else if (tmp->index == max - 2 && tmp->next->index == max)
+	{
+		ft_rotate(a, PRINT);
+		ft_switch(a);
+		ft_reverse_rotate(a, PRINT);
+	}
+}
+
 void	sort_element(t_cdlst *a, t_cdlst *b)
 {
 	t_node	*tmp;
 	int		ra;
 	int		rb;
 
+	sort_three_in_a(a);
 	while (b->lst != NULL)
 	{
 		ra = 0;
@@ -79,8 +108,8 @@ void	sort_element(t_cdlst *a, t_cdlst *b)
 			rotate_both_for_minnode(&ra, tmp, a, b);
 			rb = ra;
 		}
-		rotate_stack_for_minnode(ra, tmp, a);
-		rotate_stack_for_minnode(rb, tmp, b);
+		rotate_stack_for_minnode(ra, tmp->ra, a);
+		rotate_stack_for_minnode(rb, tmp->rb, b);
 		ft_push(a, b);
 	}
 	rotate_stack_a_to_zerotop(a);

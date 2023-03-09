@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cdlst.h                                            :+:      :+:    :+:   */
+/*   cdlst_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:15:13 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 17:05:48 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/09 16:54:46 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CDLST_H
-# define CDLST_H
+#ifndef CDLST_BONUS_H
+# define CDLST_BONUS_H
 
 # include <stdlib.h>
 
@@ -19,8 +19,6 @@ typedef struct s_node
 {
 	int				element;
 	int				index;
-	int				ra;
-	int				rb;
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;

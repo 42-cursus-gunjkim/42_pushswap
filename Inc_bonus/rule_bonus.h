@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.h                                             :+:      :+:    :+:   */
+/*   rule_bonus.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 18:37:37 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 17:43:29 by gunjkim          ###   ########.fr       */
+/*   Created: 2023/02/22 14:48:18 by gunjkim           #+#    #+#             */
+/*   Updated: 2023/03/09 17:04:41 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTIL_H
-# define UTIL_H
+#ifndef RULE_BONUS_H
+# define RULE_BONUS_H
 
-# include "cdlst.h"
-# include "stdlib.h"
+# include "cdlst_bonus.h"
 # include "../libft/libft.h"
 
-void	error_exit(char *str);
-int		is_all_digit(char *arg);
-void	quick_sort(int *arr, int start, int end);
-int		is_same(char *input, char *rule);
-int		ft_abs(int a);
-int		ft_min(int a, int b);
+void	ft_switch(t_cdlst *cdlst);
+void	ft_switch_both(t_cdlst *a, t_cdlst *b);
+void	ft_push(t_cdlst *in, t_cdlst *out);
+void	ft_rotate(t_cdlst *cdlst);
+void	ft_rotate_both(t_cdlst *a, t_cdlst *b);
+void	ft_reverse_rotate(t_cdlst *cdlst);
+void	ft_reverse_rotate_both(t_cdlst *a, t_cdlst *b);
 
 #endif
