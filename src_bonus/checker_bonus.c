@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:40:46 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 18:01:19 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/09 18:06:26 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,16 @@ void	check(t_cdlst *a, t_cdlst *b)
 		ft_printf("KO\n");
 }
 
+void	clear_all(t_cdlst *a, t_cdlst *b, int argc, char **argv)
+{
+	ft_cdlstclear(a);
+	ft_cdlstclear(b);
+	free(a);
+	free(b);
+	if (argc == 2)
+		ft_double_free(argv);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_cdlst	*a;
@@ -119,5 +129,6 @@ int	main(int argc, char *argv[])
 	b = alloc_init_cdl("b", num_of_element);
 	parse_argv(element_list, a);
 	check(a, b);
+	clear_all(a, b, argc, element_list);
 	return (0);
 }
