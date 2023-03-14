@@ -6,15 +6,15 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 18:28:19 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 17:45:27 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:04:07 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Inc_bonus/util_bonus.h"
+#include "../include_bonus/util_bonus.h"
 
-void	error_exit(char *str)
+void	error_exit(void)
 {
-	ft_printf("%s\n", str);
+	ft_putstr_fd("Error\n", 2);
 	exit(-1);
 }
 

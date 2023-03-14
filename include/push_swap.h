@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:45:05 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 15:20:04 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 15:21:00 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,3 @@ void	cal_greedy(t_cdlst *a, t_cdlst *b);
 t_node	*get_min_node(t_cdlst *b);
 
 #endif
- 

@@ -6,11 +6,11 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:44:27 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 16:26:31 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:16:17 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Inc/push_swap.h"
+#include "../include/push_swap.h"
 
 void	rotate_both_for_minnode(int *count, t_node *tmp, t_cdlst *a, t_cdlst *b)
 {
@@ -84,9 +84,8 @@ void	sort_three_in_a(t_cdlst *a)
 		ft_reverse_rotate(a, PRINT);
 	else if (tmp->index == max - 2 && tmp->next->index == max)
 	{
-		ft_rotate(a, PRINT);
 		ft_switch(a);
-		ft_reverse_rotate(a, PRINT);
+		ft_rotate(a, PRINT);
 	}
 }
 

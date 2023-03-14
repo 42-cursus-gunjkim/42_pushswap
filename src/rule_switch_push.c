@@ -6,11 +6,11 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:55:59 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 16:20:25 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 15:22:49 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Inc/rule.h"
+#include "../include/rule.h"
 
 void	ft_switch(t_cdlst *cdlst)
 {

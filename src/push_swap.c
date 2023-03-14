@@ -6,11 +6,11 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 15:18:30 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 15:46:22 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:36:14 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Inc/push_swap.h"
+#include "../include/push_swap.h"
 
 t_cdlst	*alloc_init_cdl(char *name, int max_count)
 {
@@ -18,7 +18,7 @@ t_cdlst	*alloc_init_cdl(char *name, int max_count)
 
 	new = (t_cdlst *)malloc(sizeof(t_cdlst));
 	if (new == NULL)
-		error_exit("ERROR!\n");
+		error_exit();
 	new->name = name;
 	new->max_count = max_count;
 	new->lst = NULL;
@@ -56,9 +56,9 @@ int	main(int argc, char *argv[])
 	num_of_element = 0;
 	if (argc == 2)
 	{
-		element_list = ft_split(argv[1], ' ');
+		element_list = ft_split_white(argv[1]);
 		if (element_list == NULL)
-			error_exit("ERROR!\n");
+			error_exit();
 		while (element_list[num_of_element] != NULL)
 			num_of_element++;
 	}

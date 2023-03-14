@@ -6,11 +6,11 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:34:20 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 14:17:38 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:04:11 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Inc/rule.h"
+#include "../include/rule.h"
 
 void	ft_rotate(t_cdlst *cdlst, int flag)
 {

@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:38:37 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 14:24:16 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:35:58 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ char	*get_next_line(int fd);
 int		ft_printf(const char *str, ...);
 void	ft_swap(int *a, int *b);
 void	ft_double_free(char **argv);
+char	**ft_split_white(char const *s);
 
 #endif

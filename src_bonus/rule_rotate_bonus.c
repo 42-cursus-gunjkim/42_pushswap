@@ -6,11 +6,11 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 15:34:20 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 17:09:03 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:04:06 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Inc_bonus/rule_bonus.h"
+#include "../include_bonus/rule_bonus.h"
 
 void	ft_rotate(t_cdlst *cdlst)
 {

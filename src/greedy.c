@@ -6,12 +6,12 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:27:38 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 15:49:34 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:19:43 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Inc/rule.h"
-#include "../Inc/util.h"
+#include "../include/rule.h"
+#include "../include/util.h"
 
 int	get_a_rotate_count(t_cdlst *a, int index)
 {
@@ -109,12 +109,12 @@ void	partition(t_cdlst *a, t_cdlst *b)
 	count = 0;
 	while (count < a->max_count - 1 && a->count > 3)
 	{
-		if (a->lst->index <= pivot)
+		if (a->lst->index < pivot)
 		{
 			ft_push(b, a);
 			ft_rotate(b, PRINT);
 		}
-		else if (a->lst->index < (pivot * 2) && a->lst->index > pivot)
+		else if (a->lst->index < (pivot * 2) && a->lst->index >= pivot)
 			ft_push(b, a);
 		else
 			ft_rotate(a, PRINT);

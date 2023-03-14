@@ -6,11 +6,11 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 16:40:46 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 18:06:26 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:36:42 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Inc_bonus/checker_bonus.h"
+#include "../include_bonus/checker_bonus.h"
 
 t_cdlst	*alloc_init_cdl(char *name, int max_count)
 {
@@ -18,7 +18,7 @@ t_cdlst	*alloc_init_cdl(char *name, int max_count)
 
 	new = (t_cdlst *)malloc(sizeof(t_cdlst));
 	if (new == NULL)
-		error_exit("ERROR!\n");
+		error_exit();
 	new->name = name;
 	new->max_count = max_count;
 	new->lst = NULL;
@@ -51,7 +51,7 @@ void	exec_rule(char *rule, t_cdlst *a, t_cdlst *b)
 	else if (is_same(rule, "rrr\n"))
 		ft_reverse_rotate_both(a, b);
 	else
-		error_exit("ERROR!");
+		error_exit();
 }
 
 int	is_sorted(t_cdlst *a, t_cdlst *b)
@@ -68,16 +68,22 @@ int	is_sorted(t_cdlst *a, t_cdlst *b)
 		if (tmp->index > tmp->next->index)
 			return (0);
 		index++;
+		tmp = tmp->next;
 	}
 	if (a->count != a->max_count)
 		return (0);
 	return (1);
 }
 
-void	check(t_cdlst *a, t_cdlst *b)
+void	check(int num_of_element, char **element_list)
 {
 	char	*rule;
+	t_cdlst	*a;
+	t_cdlst	*b;
 
+	a = alloc_init_cdl("a", num_of_element);
+	b = alloc_init_cdl("b", num_of_element);
+	parse_argv(element_list, a);
 	rule = get_next_line(0);
 	while (rule != NULL)
 	{
@@ -90,22 +96,11 @@ void	check(t_cdlst *a, t_cdlst *b)
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
-}
-
-void	clear_all(t_cdlst *a, t_cdlst *b, int argc, char **argv)
-{
-	ft_cdlstclear(a);
-	ft_cdlstclear(b);
-	free(a);
-	free(b);
-	if (argc == 2)
-		ft_double_free(argv);
+	clear_all(a, b);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_cdlst	*a;
-	t_cdlst	*b;
 	int		num_of_element;
 	char	**element_list;
 
@@ -114,9 +109,9 @@ int	main(int argc, char *argv[])
 	num_of_element = 0;
 	if (argc == 2)
 	{
-		element_list = ft_split(argv[1], ' ');
+		element_list = ft_split_white(argv[1]);
 		if (element_list == NULL)
-			error_exit("ERROR!\n");
+			error_exit();
 		while (element_list[num_of_element] != NULL)
 			num_of_element++;
 	}
@@ -125,10 +120,8 @@ int	main(int argc, char *argv[])
 		num_of_element = argc - 1;
 		element_list = argv + 1;
 	}
-	a = alloc_init_cdl("a", num_of_element);
-	b = alloc_init_cdl("b", num_of_element);
-	parse_argv(element_list, a);
-	check(a, b);
-	clear_all(a, b, argc, element_list);
+	check(num_of_element, element_list);
+	if (argc == 2)
+		ft_double_free(element_list);
 	return (0);
 }

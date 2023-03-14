@@ -6,11 +6,11 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 13:14:01 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 13:33:07 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:04:13 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Inc/cdlst.h"
+#include "../include/cdlst.h"
 
 t_node	*ft_cdlst_get_front(t_cdlst *cdl)
 {

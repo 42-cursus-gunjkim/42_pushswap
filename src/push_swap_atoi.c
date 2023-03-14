@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   push_swap_atoi.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 15:22:16 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/14 15:19:08 by gunjkim          ###   ########.fr       */
+/*   Created: 2023/03/14 13:31:58 by gunjkim           #+#    #+#             */
+/*   Updated: 2023/03/14 16:27:40 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/util.h"
 
 static int	ft_isspace(int c)
 {
@@ -19,7 +19,7 @@ static int	ft_isspace(int c)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
+int	ps_atoi(const char *str)
 {
 	int			sign;
 	long long	result;
@@ -37,5 +37,8 @@ int	ft_atoi(const char *str)
 		result = result * 10 + (*str - '0');
 		str++;
 	}
-	return (result * sign);
+	result = result * sign;
+	if (result < -2147483648 || result > 2147483647)
+		error_exit();
+	return (result);
 }

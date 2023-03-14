@@ -6,17 +6,16 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:13:21 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/09 15:09:02 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 16:04:13 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
-#include "../Inc/cdlst.h"
-#include "../Inc/util.h"
+#include "../include/cdlst.h"
+#include "../include/util.h"
 
 int	arg_check(char *arg)
 {
-	int		tmp;
 	int		flag;
 
 	if (!is_all_digit(arg))
@@ -27,11 +26,6 @@ int	arg_check(char *arg)
 		flag = -1;
 	else
 		flag = 1;
-	tmp = ft_atoi(arg);
-	if (flag == -1 && tmp >= 0)
-		return (-1);
-	if (flag == 1 && tmp < 0)
-		return (-1);
 	return (1);
 }
 
@@ -66,7 +60,7 @@ void	is_duplicated(int *arr, int n)
 		while (next_i < n)
 		{
 			if (tmp == arr[next_i])
-				error_exit("ERROR!\n");
+				error_exit();
 			next_i++;
 		}
 		index++;
@@ -101,15 +95,15 @@ void	parse_argv(char **argv, t_cdlst *a)
 	index = 0;
 	arr_index = (int *)malloc(sizeof(int) * a->max_count);
 	if (arr_index == NULL)
-		error_exit("ERROR!");
+		error_exit();
 	while (index < a->max_count)
 	{
 		if (arg_check(argv[index]) == -1)
-			error_exit("ERROR!");
-		arr_index[index] = ft_atoi(argv[index]);
+			error_exit();
+		arr_index[index] = ps_atoi(argv[index]);
 		new = ft_cdlstnew(arr_index[index]);
 		if (new == NULL)
-			error_exit("ERROR!");
+			error_exit();
 		ft_cdlst_add_back(a, new);
 		(a->count)++;
 		index++;
