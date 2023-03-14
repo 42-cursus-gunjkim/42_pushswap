@@ -6,7 +6,7 @@
 /*   By: gunjkim <gunjkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:27:38 by gunjkim           #+#    #+#             */
-/*   Updated: 2023/03/14 16:19:43 by gunjkim          ###   ########.fr       */
+/*   Updated: 2023/03/14 19:38:42 by gunjkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,17 @@ void	partition(t_cdlst *a, t_cdlst *b)
 {
 	int		pivot;
 	int		count;
+	int		big;
 
+	big = a->max_count - 1;
 	pivot = (int)(a->max_count / 3);
 	count = 0;
-	while (count < a->max_count - 1 && a->count > 3)
+	while (count < a->max_count && a->count > 3)
 	{
-		if (a->lst->index < pivot)
+		if (a->lst->index == big || a->lst->index == big - 1 \
+		|| a->lst->index == big - 2)
+			ft_rotate(a, PRINT);
+		else if (a->lst->index < pivot)
 		{
 			ft_push(b, a);
 			ft_rotate(b, PRINT);
